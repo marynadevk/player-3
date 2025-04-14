@@ -1,5 +1,5 @@
 'use client';
-import React, { DragEvent, useState } from 'react';
+import React, { useState } from 'react';
 import {
   DndContext,
   closestCenter,
@@ -19,12 +19,14 @@ import 'react-resizable/css/styles.css';
 import { gridCols, gridUnit, dndInitialTiles } from '@/constants';
 import { IDndTile } from '../types/types';
 import { Card } from './ui/card';
-import { DeleteButton } from './DeleteButton';
 import { renderTileContent } from '@/lib/utils';
 import { useLocalStorageDndTiles } from '@/hooks/useLocalStorageDndTiles';
 
 export const DndKitVersion = () => {
-  const [tiles, setTiles] = useLocalStorageDndTiles('dndTiles', dndInitialTiles);
+  const [tiles, setTiles] = useLocalStorageDndTiles(
+    'dndTiles',
+    dndInitialTiles
+  );
   const sensors = useSensors(useSensor(PointerSensor));
   const [activeId, setActiveId] = useState<string | null>(null);
 
@@ -92,7 +94,6 @@ export const DndKitVersion = () => {
 
 function SortableTile({
   tile,
-  className,
   isOverlay = false,
 }: {
   tile: IDndTile;
@@ -103,7 +104,6 @@ function SortableTile({
     attributes,
     listeners,
     setNodeRef,
-    transform,
     transition,
     isDragging,
     isOver,
@@ -140,4 +140,3 @@ function SortableTile({
     </div>
   );
 }
-

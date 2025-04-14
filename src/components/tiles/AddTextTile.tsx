@@ -3,15 +3,22 @@
 import React, { useEffect, useState } from 'react';
 import { Textarea } from '../ui/textarea';
 
-export const AddTextTile = ({ tileType }: {tileType: string}) => {
-  const [text, setText] = useState<string>(() => {
-    return localStorage.getItem(`inputText-${tileType}`) || '';
-  });
-  const [isEditing, setIsEditing] = useState<boolean>(false);
+export const AddTextTile = ({ tileType }: { tileType: string }) => {
+  const [isEditing, setIsEditing] = useState(false);
+  const [text, setText] = useState('');
 
   useEffect(() => {
-    localStorage.setItem(`inputText-${tileType}`, text);
-  }, [text]);
+    if (typeof window !== 'undefined') {
+      const storedText = localStorage.getItem(`inputText-${tileType}`);
+      if (storedText) setText(storedText);
+    }
+  }, [tileType]);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      localStorage.setItem(`inputText-${tileType}`, text);
+    }
+  }, [text, tileType]);
 
   return (
     <div
