@@ -1,5 +1,6 @@
 # Partial implementation of Player3
-[Demo version ✨]()  
+[Demo version ✨](https://player-3.vercel.app/profile)
+)  
 ### Tech Stack
 - **Next.js**
 - **DnD Kit**
